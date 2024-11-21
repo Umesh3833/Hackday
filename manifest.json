@@ -1,0 +1,31 @@
+{
+    "manifest_version": 3,
+    "name": "Excel Link Opener",
+    "version": "1.0",
+    "description": "Opens Excel sheet links from the popup.",
+    "permissions": [
+      "scripting",
+      "tabs"
+    ],
+    "host_permissions": [
+      "https://in.mathworks.com/matlabcentral/answers/*"
+    
+    ],
+    "action": {
+      "default_popup": "popup.html",
+      "default_icon": {
+        "16": "icon.png",
+        "48": "icon.png",
+        "128": "icon.png"
+      }
+    },
+    "background": {
+      "service_worker": "background.js"
+    },
+    "content_scripts": [
+      {
+        "matches": ["https://in.mathworks.com/matlabcentral/answers/*"],
+        "js": ["content.js"]
+      }
+    ]
+  }
