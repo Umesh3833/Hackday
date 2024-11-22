@@ -1,12 +1,14 @@
+function getQuestionIDs() {
+  let question_ids = [];
+  const tags=document.querySelectorAll('.content_container tr')
+  tags.forEach((i)=>{
+      let tag=i.id;
+      const id = tag.split('_')[2];
+      question_ids.push(id);
+  })
+  return question_ids;
+}
 
-
-let question_ids = [];
-const tags=document.querySelectorAll('.content_container tr')
-tags.forEach((i)=>{
-    let tag=i.id;
-    const id = tag.split('_')[2];
-    question_ids.push(id);
-})
 
 const names = [
     '', 'Bob', 'Charlie', 'David', 'Eve', 'Frank', 
@@ -19,15 +21,13 @@ const names = [
     'Rose', 'Sara', 'Tom', 'Uri', 'Vera', 'Will', 
     'Xena', 'Yuri'
 ];
-console.log(window.location.href)
+
 // Create a JSON object with IDs as keys and names as values
+const question_ids = getQuestionIDs();
 const jsonObject = {};
-ids.forEach((id, index) => {
+question_ids.forEach((id, index) => {
     jsonObject[id] = names[index % names.length]; // Use modulo to loop names if not enough
 });
-
-// Convert the object to a JSON string
-const jsonString = JSON.stringify(jsonObject, null, 2);
 
   // Function to add a div next to every h4 element
 function addDivNextToH4() {
@@ -38,13 +38,11 @@ function addDivNextToH4() {
       
       // Create a new div element
       const newDiv = document.createElement('div');
-      const jsonObject = JSON.parse(jsonString);
-      if(jsonObject[ids[id]]){
+      // const jsonObject = JSON.parse(jsonString);
+      if(jsonObject[question_ids[id]]){
         // Ensure the ID exists in jsonObject to prevent undefined errors
-        const assignedName = jsonObject[ids[id]] || 'Unknown';
+        const assignedName = jsonObject[question_ids[id]] || 'Unknown';
         newDiv.textContent = `Assigned to ${assignedName}`;
-    //   newDiv.textContent = `Assigned to ${jsonString[ids[id]]}`;
-      
   
       // Apply styles for rounded borders and positioning
       newDiv.style.display = 'inline-block';
@@ -102,8 +100,8 @@ function addAssignButtonIfNeeded() {
       // Assuming you want to add it to a specific container or at the end of the body
       buttonContainer.appendChild(assignButton);
       document.body.appendChild(buttonContainer);
-      // heading.parentNode.insertBefore(buttonContainer, heading.nextSibling);
-      // heading.insertAdjacentElement('afterend', buttonContainer);
+      heading.parentNode.insertBefore(buttonContainer, heading.nextSibling);
+      heading.insertAdjacentElement('afterend', buttonContainer);
      
   }
 }
