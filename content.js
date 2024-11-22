@@ -1,17 +1,13 @@
 
 
-
-const links=document.querySelectorAll('.question-landing-title a')
-const ids=[]
-links.forEach((i)=>{
-    link=i.getAttribute('href');
-    const match = link.match(/\/(\d+)-/); // Regex to find the number before the dash
-
-    if (match && match[1]) {
-      ids.push(match[1]);
-    }
-    console.log(match[1])
+let question_ids = [];
+const tags=document.querySelectorAll('.content_container tr')
+tags.forEach((i)=>{
+    let tag=i.id;
+    const id = tag.split('_')[2];
+    question_ids.push(id);
 })
+
 const names = [
     '', 'Bob', 'Charlie', 'David', 'Eve', 'Frank', 
     'Grace', 'Hannah', 'Isaac', 'Jack', 'Karen', 'Leo', 
